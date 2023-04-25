@@ -53,20 +53,20 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
           
     ## deploy to main
-    # - name: Deploy to main
-    #   uses: appleboy/ssh-action@master
-    #   id: deploy-main
-    #   if: contains(github.ref, 'main')
-    #   with:
-    #     host: ${{ secrets.HOST }}
-    #     username: ${{ secrets.USERNAME }}
-    #     key: ${{ secrets.REMOTE_SSH_KEY }}
-    #     port: ${{ secrets.SSH_PORT }}
-    #     script: |
-    #         echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-    #         docker rm -f $(docker ps -qa)
-    #         docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-    #         docker run --rm -d -p ${{ secrets.PORT }}:${{ secrets.WAS_PORT }} ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
+    - name: Deploy to main
+      uses: appleboy/ssh-action@master
+      id: deploy-main
+      if: contains(github.ref, 'main')
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.REMOTE_SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+            echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+            docker rm -f $(docker ps -qa)
+            docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
+            docker run --rm -d -p ${{ secrets.PORT }}:${{ secrets.WAS_PORT }} ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
             
             
             
