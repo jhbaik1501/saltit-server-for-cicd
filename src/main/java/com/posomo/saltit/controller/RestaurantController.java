@@ -64,6 +64,13 @@ public class RestaurantController {
     }
 
     @GetMapping("/")
+    @Operation(summary = "swagger 테스트용 api", description = "swagger 문서 테스트용 api 입니다.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "OK"),
+        @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+        @ApiResponse(responseCode = "404", description = "NOT FOUND"),
+        @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+    })
     public String v() {
         return "test success";
     }
