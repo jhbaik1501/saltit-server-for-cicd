@@ -62,4 +62,9 @@ public class RestaurantController {
             return true;
         return false;
     }
+
+    @GetMapping("/")
+    public String v() {
+        return "test success";
+    }
 }
