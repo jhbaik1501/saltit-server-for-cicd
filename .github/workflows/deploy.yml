@@ -63,15 +63,10 @@ jobs:
         key: ${{ secrets.REMOTE_SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-            ls -al
-            pwd
-            pwd
-            pwd
+            cd /home/ubuntu/saltit-ec2-environment/
             echo ${{ secrets.DOCKER_TOKEN }} | sudo docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-            sudo docker rm -f $(docker ps -qa)
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-            sudo docker run --rm -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-            
+            chmod +x release-process.sh
+            sudo sh release-process.sh
             
             
       
