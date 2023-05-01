@@ -30,7 +30,7 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
 
     @Operation(summary = "home 화면, 식당 요약 정보 제공용 api", description = "식당의 메인 이미지 주소, 페이지 정보," +
-            "식당 요약 리스트를 제공합니다.")
+            "식당 요약 리스트를 제공합니다.") 
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "정상 응답",
                     content = @Content(schema = @Schema(implementation = RestaurantSummaryList.class))),
